@@ -1,0 +1,6 @@
+function temperature = GetTemperature(states)
+    global k m; 
+    temperature = ((sum(states(:,3).^2) + sum(states(:,4).^2))/...
+    (2*k)*m)/num_particles;
+end
+
