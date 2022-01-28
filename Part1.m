@@ -20,7 +20,7 @@ box.height = 100*10^(-9);
 
 show_all_particles = 0;
 num_particles = 1000;
-traced_particles = 50;
+traced_particles = 100;
 
 global dt;
 dt = box.height/vth/100;

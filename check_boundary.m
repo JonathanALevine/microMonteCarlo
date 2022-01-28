@@ -11,7 +11,6 @@ function states = check_boundary(states)
     states(indices,4) = -states(indices,4);
     
     indices = states(:,2) < 0;
-    states(indices,2) = -states(indices,2);
     states(indices,4) = -states(indices,4);
     
 end
