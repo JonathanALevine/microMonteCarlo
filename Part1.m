@@ -18,24 +18,25 @@ vth = sqrt(2*k*T/m);
 MFP = vth * tau;
 
 % Simulation controls
-global box;
-box.length = 200*10^(-9);
-box.height = 100*10^(-9);
+global world;
+world.length = 200*10^(-9);
+world.height = 100*10^(-9);
 
 num_particles = 1000;
 traced_particles = 10;
 distribution_type = nan;
 scatter_particle = 0;
+bottleneck = 0;
 
 global dt;
-dt = box.height/vth/100;
+dt = world.height/vth/100;
 epochs = 1000;
 
 show_all_particles = 0;
 save_plots = 1;
 
+% Generate the states
 states = GenerateStates(num_particles, distribution_type);
-
 
 temperatures = zeros(epochs, 1);
 
@@ -45,8 +46,8 @@ for epoch = 1:epochs
     if show_all_particles
         plot(states(:,1)/(10^(-9)),...
                 states(:,2)/(10^(-9)), 'b*');
-        xlim([0 box.length/(10^(-9))]);
-        ylim([0 box.height/(10^(-9))]);
+        xlim([0 world.length/(10^(-9))]);
+        ylim([0 world.height/(10^(-9))]);
         xlabel('x (nm)')
         ylabel('y (nm)')
     
@@ -57,14 +58,14 @@ for epoch = 1:epochs
         end
     
         plot(xValues/10^(-9), yValues/10^(-9), '.')
-        xlim([0 box.length/(10^(-9))]);
-        ylim([0 box.height/(10^(-9))]);
+        xlim([0 world.length/(10^(-9))]);
+        ylim([0 world.height/(10^(-9))]);
         xlabel('x (nm)')
         ylabel('y (nm)')
     end
     
     % Check the boundary conditions of the particles
-    states = check_boundary(states);
+    states = WorldBoundaryHandler(states);
     % Move the particle
     states = move_particle(states, scatter_particle);
     % Get the semi conductor temperature at this time step

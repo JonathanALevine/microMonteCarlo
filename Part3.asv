@@ -26,77 +26,62 @@ MFP = vth * tau;
 
 % Simulation Controls
 num_particles = 1000;
-traced_particles = 100;
+traced_particles = 10;
 distribution_type = 'MB';
 epochs = 1000;
 show_all_particles = 0;
 save_plots = 1;
-scatter_particle = 0;
+scatter_particle = 1;
 bottleneck = 1;
 bottlenecks = 1e-9.*[80 120 0 40; 80 120 60 100];
 
 % Generate the states
 states = GenerateStates(num_particles, distribution_type);
-states = 
 
 % Get the mean speed
 mean_speed = sqrt(mean(states(:,3).^2 + states(:,4).^2));
 
 temperatures = zeros(epochs, 1);
 figure(2)
-for epoch = 1:epochs
-    % Plot the positions of the particles
-
-    if show_all_particles
-        plot(states(:,1)/(10^(-9)),...
-                states(:,2)/(10^(-9)), 'b*');
-        xlim([0 world.length/(10^(-9))]);
-        ylim([0 world.height/(10^(-9))]);
-        xlabel('x (nm)')
-        ylabel('y (nm)')
-    
-    else
-        for n = 1:traced_particles
-            xValues(epoch, n) = states(n:n,1).';
-            yValues(epoch, n) = states(n:n,2).';
-        end
-    
-        plot(xValues/10^(-9), yValues/10^(-9), '.')
-        xlim([0 world.length/(10^(-9))]);
-        ylim([0 world.height/(10^(-9))]);
-        xlabel('x (nm)')
-        ylabel('y (nm)')
-    end
-    
-    % Check the boundary conditions of the particles
-    states = WorldBoundaryHandler(states);
-    % Handle the collisions with the bottlenecks
-    states = BoxCollisionHandler(states);
-    % Move the particle
-    if scatter_particle
-        states = ScatterParticle(states);
-    end
-    states = move_particle(states, scatter_particle);
-    % Get the semi conductor temperature at this time step
-    temperatures(epoch) = mean(states(:,5));
-    
-    pause (0.01)
-end
-
 if bottleneck
-    hold on
-    % Plot the first box
-    plot([80 120], [0.4 0.4].*100, 'k')
-    plot([80 80], [0 0.4].*100, 'k')
-    plot([120 120], [0 0.4].*100, 'k')
-    % Plot the second box
-    plot([80 120], [0.6 0.6].*100, 'k')
-    plot([80 80], [1 0.6].*100, 'k')
-    plot([120 120], [1 0.6].*100, 'k')
-    hold off
+    for i=size(bottlenecks(:,1]))
+        plot([bottlenecks(i, 1) bottlenecks(i, 1) bottlenecks(i, 1) bottlenecks(i, 1)
+    end
 end
-
-
+% for epoch = 1:epochs
+%     % Plot the positions of the particles
+% 
+%     if show_all_particles
+%         plot(states(:,1)/(10^(-9)),...
+%                 states(:,2)/(10^(-9)), 'b*');
+%         xlim([0 world.length/(10^(-9))]);
+%         ylim([0 world.height/(10^(-9))]);
+%         xlabel('x (nm)')
+%         ylabel('y (nm)')
+%     
+%     else
+%         for n = 1:traced_particles
+%             xValues(epoch, n) = states(n:n,1).';
+%             yValues(epoch, n) = states(n:n,2).';
+%         end
+%     
+%         plot(xValues/10^(-9), yValues/10^(-9), '.')
+%         xlim([0 world.length/(10^(-9))]);
+%         ylim([0 world.height/(10^(-9))]);
+%         xlabel('x (nm)')
+%         ylabel('y (nm)')
+%     end
+%     
+%     % Check the boundary conditions of the particles
+%     states = check_boundary(states, bottleneck);
+%     % Move the particle
+%     states = move_particle(states, scatter_particle);
+%     % Get the semi conductor temperature at this time step
+%     temperatures(epoch) = mean(states(:,5));
+%     
+%     pause (0.01)
+% end
+% 
 % % if save_plots
 % %     FN2 = 'Part 2 Particle Trajectories';   
 % %     print(gcf, '-dpng', '-r600', FN2);  %Save graph in PNG
