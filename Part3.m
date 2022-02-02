@@ -25,13 +25,13 @@ Pscat = 1 - exp(-dt/tau);
 MFP = vth * tau;
 
 % Simulation Controls
-num_particles = 1000;
+num_particles = 10000;
 traced_particles = 10;
 distribution_type = 'MB';
 epochs = 1000;
 show_all_particles = 1;
 save_plots = 1;
-scatter_particle = 0;
+scatter_particle = 1;
 bottleneck = 1;
 bottlenecks = 1e-9.*[80 120 0 40; 80 120 60 100];
 
@@ -43,45 +43,36 @@ states = FixInitialPositions(states);
 mean_speed = sqrt(mean(states(:,3).^2 + states(:,4).^2));
 
 temperatures = zeros(epochs, 1);
+
 figure(2)
 for epoch = 1:epochs
     % Plot the positions of the particles
-
     if show_all_particles
-        plot(states(:,1)/(10^(-9)),...
-                states(:,2)/(10^(-9)), 'b*');
-        xlim([0 world.length/(10^(-9))]);
-        ylim([0 world.height/(10^(-9))]);
-        xlabel('x (nm)')
-        ylabel('y (nm)')
-    
+        PlotAllParticles(states);
     else
         for n = 1:traced_particles
             xValues(epoch, n) = states(n:n,1).';
             yValues(epoch, n) = states(n:n,2).';
         end
-    
         plot(xValues/10^(-9), yValues/10^(-9), '.')
         xlim([0 world.length/(10^(-9))]);
         ylim([0 world.height/(10^(-9))]);
         xlabel('x (nm)')
         ylabel('y (nm)')
     end
-    
     % Check the boundary conditions of the particles
     states = WorldBoundaryHandler(states);
-    % Handle the collisions with the bottlenecks
+    % Handle the collisions with the boxes
     states = BoxCollisionHandler(states);
-    % Move the particle
+    % scatter particle if selected scatter_particle=1
     if scatter_particle
         states = ScatterParticle(states);
     end
+    % Move the particle
     states = move_particle(states, scatter_particle);
-    % Get the semi conductor temperature at this time step
+    % Get the semiconductor temperature at this time step
     temperatures(epoch) = mean(states(:,5));
-    
     epoch
-    
     pause (0.01)
 end
 

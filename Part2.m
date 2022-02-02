@@ -25,14 +25,13 @@ Pscat = 1 - exp(-dt/tau);
 MFP = vth * tau;
 
 % Simulation Controls
-num_particles = 1000;
+num_particles = 10000;
 traced_particles = 10;
 distribution_type = 'MB';
 epochs = 1000;
 show_all_particles = 0;
 save_plots = 1;
 scatter_particle = 1;
-bottleneck = 0;
 
 % Generate the states
 states = GenerateStates(num_particles, distribution_type);
@@ -54,35 +53,27 @@ for epoch = 1:epochs
     % Plot the positions of the particles
     figure(2)
     if show_all_particles
-        plot(states(:,1)/(10^(-9)),...
-                states(:,2)/(10^(-9)), 'b*');
-        xlim([0 world.length/(10^(-9))]);
-        ylim([0 world.height/(10^(-9))]);
-        xlabel('x (nm)')
-        ylabel('y (nm)')
-    
+        PlotAllParticles(states);
     else
         for n = 1:traced_particles
             xValues(epoch, n) = states(n:n,1).';
             yValues(epoch, n) = states(n:n,2).';
         end
-    
         plot(xValues/10^(-9), yValues/10^(-9), '.')
         xlim([0 world.length/(10^(-9))]);
         ylim([0 world.height/(10^(-9))]);
         xlabel('x (nm)')
         ylabel('y (nm)')
     end
-    
     % Check the boundary conditions of the particles
     states = WorldBoundaryHandler(states);
     if scatter_particle
       states = ScatterParticle(states);
     end
     states = move_particle(states);
-    % Get the semi conductor temperature at this time step
+    % Get the semiconductor temperature at this time step
     temperatures(epoch) = mean(states(:,5));
-    
+    epoch
     pause (0.01)
 end
 
