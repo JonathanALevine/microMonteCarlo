@@ -18,7 +18,7 @@ world.height = 100*10^(-9);
 global vth;
 vth = sqrt(2*k*T/m);
 
-dt = world.height/vth/100;
+dt = world.height/vth/1000;
 Pscat = 1 - exp(-dt/tau);
 
 % The mean free path = velocity*mean time between collisions
@@ -26,10 +26,10 @@ MFP = vth * tau;
 
 % Simulation Controls
 num_particles = 1000;
-traced_particles = 100;
+traced_particles = 10;
 distribution_type = 'MB';
 epochs = 1000;
-show_all_particles = 0;
+show_all_particles = 1;
 save_plots = 1;
 scatter_particle = 0;
 bottleneck = 1;
@@ -37,7 +37,7 @@ bottlenecks = 1e-9.*[80 120 0 40; 80 120 60 100];
 
 % Generate the states
 states = GenerateStates(num_particles, distribution_type);
-states = 
+states = FixInitialPositions(states);
 
 % Get the mean speed
 mean_speed = sqrt(mean(states(:,3).^2 + states(:,4).^2));
@@ -80,6 +80,8 @@ for epoch = 1:epochs
     % Get the semi conductor temperature at this time step
     temperatures(epoch) = mean(states(:,5));
     
+    epoch
+    
     pause (0.01)
 end
 
@@ -96,6 +98,12 @@ if bottleneck
     hold off
 end
 
+figure(3)
+values = hist3([states(:,1), states(:,2)], [200 100], 'CdataMode','auto');
+imagesc(values.')
+colorbar
+axis equal
+axis xy
 
 % % if save_plots
 % %     FN2 = 'Part 2 Particle Trajectories';   

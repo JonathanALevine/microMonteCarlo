@@ -1,4 +1,0 @@
-function states = BoxCollisionHandler(states)
-    
-end
-
