@@ -43,7 +43,7 @@ mean_speed = sqrt(mean(states(:,3).^2 + states(:,4).^2));
 figure(1)
 histogram(sqrt(states(:,3).^2 + states(:,4).^2))
 if save_plots
-    FN2 = 'Histogram of Initial Particle Speeds';   
+    FN2 = 'Figures/Histogram of Initial Particle Speeds';   
     print(gcf, '-dpng', '-r600', FN2);  %Save graph in PNG
 end
 
@@ -78,7 +78,7 @@ for epoch = 1:epochs
 end
 
 if save_plots
-    FN2 = 'Part 2 Particle Trajectories';   
+    FN2 = 'Figures/Part 2 Particle Trajectories';   
     print(gcf, '-dpng', '-r600', FN2);  %Save graph in PNG
 
     figure(3)
@@ -87,12 +87,12 @@ if save_plots
     ylabel('Temperature (K)')
     ylim([min(temperatures)*0.98 max(temperatures)*1.02])
 
-    FN2 = 'Part 2 Temperature Plot';   
+    FN2 = 'Figures/Part 2 Temperature Plot';   
     print(gcf, '-dpng', '-r600', FN2);  %Save graph in PNG
     
     figure(4)
     histogram(sqrt(states(:,3).^2 + states(:,4).^2))
-    FN2 = 'Histogram of Final Particle Speeds';   
+    FN2 = 'Figures/Histogram of Final Particle Speeds';   
     print(gcf, '-dpng', '-r600', FN2);  %Save graph in PNG
 end
 

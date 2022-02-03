@@ -9,9 +9,11 @@ function states = WorldBoundaryHandler(states)
     
     indices = states(:,2) > world.height;
     states(indices,4) = -states(indices,4);
+    states(indices, 2) = world.height;
     
     indices = states(:,2) < 0;
     states(indices,4) = -states(indices,4);
+    states(indices,2) = 0;
     
 end
 

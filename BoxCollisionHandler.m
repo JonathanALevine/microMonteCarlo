@@ -24,4 +24,3 @@ function states = BoxCollisionHandler(states)
     indices =  states(:,2) >= top_wall2*0.99 & states(:,1) > left_wall & states(:,1) < right_wall;
     states(indices, 4) = -states(indices, 4);
 end
-

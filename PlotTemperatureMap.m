@@ -6,7 +6,10 @@ function PlotTemperatureMap(states)
     [X, Y] = meshgrid(xx, yy);
     Z = griddata(x, y, states(:,5), X, Y);
     surf(X, Y, Z);
-    colorbar;
+    c = colorbar;
+    c.Label.String = 'Particle Temperature (K)';
+    xlabel('x (nm)');
+    ylabel('y (nm)');
     view(2);
 end
 

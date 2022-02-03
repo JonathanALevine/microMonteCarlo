@@ -25,11 +25,11 @@ Pscat = 1 - exp(-dt/tau);
 MFP = vth * tau;
 
 % Simulation Controls
-num_particles = 1000;
-traced_particles = 25;
+num_particles = 10000;
+traced_particles = 10;
 distribution_type = 'MB';
 epochs = 10000;
-show_all_particles = 1;
+show_all_particles = 0;
 save_plots = 1;
 scatter_particle = 1;
 bottleneck = 1;
@@ -47,19 +47,18 @@ temperatures = zeros(epochs, 1);
 figure(1)
 for epoch = 1:epochs
     % Plot the positions of the particles
-    if show_all_particles
-        PlotAllParticles(states)
-    else
-        for n = 1:traced_particles
-            xValues(epoch, n) = states(n:n,1).';
-            yValues(epoch, n) = states(n:n,2).';
-        end
-        plot(xValues/10^(-9), yValues/10^(-9), '.')
-        xlim([0 world.length/(10^(-9))]);
-        ylim([0 world.height/(10^(-9))]);
-        xlabel('x (nm)')
-        ylabel('y (nm)')
+    subplot(2, 1, 1)
+    PlotAllParticles(states)
+    subplot(2, 1, 2)
+    for n = 1:traced_particles
+        xValues(epoch, n) = states(n:n,1).';
+        yValues(epoch, n) = states(n:n,2).';
     end
+    plot(xValues/10^(-9), yValues/10^(-9), '.')
+    xlim([0 world.length/(10^(-9))]);
+    ylim([0 world.height/(10^(-9))]);
+    xlabel('x (nm)')
+    ylabel('y (nm)')
     % Check the boundary conditions of the particles
     states = WorldBoundaryHandler(states);
     % Handle the collisions with the boxes
@@ -81,21 +80,21 @@ if bottleneck
 end
 
 if save_plots
-    FN2 = 'Part 2 Particle Trajectories';   
+    FN2 = 'Figures/Part 3 Particle Trajectories';   
     print(gcf, '-dpng', '-r600', FN2);  %Save graph in PNG
 end
 
 figure(2)
 PlotParticleDensity(states)
 if save_plots
-    FN2 = 'ParticleDensityMap';   
+    FN2 = 'Figures/ParticleDensityMap';   
     print(gcf, '-dpng', '-r600', FN2);  %Save graph in PNG
 end
 
 figure(3)
 PlotTemperatureMap(states)
 if save_plots
-    FN2 = 'TemperatureMap';   
+    FN2 = 'Figures/TemperatureMap';   
     print(gcf, '-dpng', '-r600', FN2);  %Save graph in PNG
 end
 

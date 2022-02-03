@@ -67,7 +67,7 @@ for epoch = 1:epochs
 end
 
 if save_plots
-    FN2 = 'Part 1 Particle Trajectories';   
+    FN2 = 'Figures/Part 1 Particle Trajectories';   
     print(gcf, '-dpng', '-r600', FN2);  %Save graph in PNG
 
     figure(2)
@@ -75,7 +75,7 @@ if save_plots
     xlabel('Time (1/100 sec)')
     ylabel('Temperature (K)') 
 
-    FN2 = 'Part 1 Temperature Plot';   
+    FN2 = 'Figures/Part 1 Temperature Plot';   
     print(gcf, '-dpng', '-r600', FN2);  %Save graph in PNG
 end
 
