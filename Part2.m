@@ -32,9 +32,14 @@ epochs = 1000;
 show_all_particles = 0;
 save_plots = 1;
 scatter_particle = 1;
+bottleneck = 0;
 
 % Generate the states
 states = GenerateStates(num_particles, distribution_type);
+% Remove particles that spawn inside the boxes
+if bottleneck
+    states = FixInitialPositions(states);
+end
 
 % Get the mean speed
 mean_speed = sqrt(mean(states(:,3).^2 + states(:,4).^2));
@@ -42,6 +47,8 @@ mean_speed = sqrt(mean(states(:,3).^2 + states(:,4).^2));
 % Get histogram of particle speeds
 figure(1)
 histogram(sqrt(states(:,3).^2 + states(:,4).^2))
+xlabel('Particle Speed (m/s)')
+ylabel('Number of Particles')
 if save_plots
     FN2 = 'Figures/Histogram of Initial Particle Speeds';   
     print(gcf, '-dpng', '-r600', FN2);  %Save graph in PNG
@@ -52,21 +59,24 @@ temperatures = zeros(epochs, 1);
 for epoch = 1:epochs
     % Plot the positions of the particles
     figure(2)
-    if show_all_particles
-        PlotAllParticles(states);
-    else
-        for n = 1:traced_particles
-            xValues(epoch, n) = states(n:n,1).';
-            yValues(epoch, n) = states(n:n,2).';
-        end
-        plot(xValues/10^(-9), yValues/10^(-9), '.')
-        xlim([0 world.length/(10^(-9))]);
-        ylim([0 world.height/(10^(-9))]);
-        xlabel('x (nm)')
-        ylabel('y (nm)')
+    % Plot the positions of the particles
+    subplot(2, 1, 1)
+    PlotAllParticles(states)
+    subplot(2, 1, 2)
+    for n = 1:traced_particles
+        xValues(epoch, n) = states(n:n,1).';
+        yValues(epoch, n) = states(n:n,2).';
     end
+    plot(xValues/10^(-9), yValues/10^(-9), '.')
+    xlim([0 world.length/(10^(-9))]);
+    ylim([0 world.height/(10^(-9))]);
+    xlabel('x (nm)')
+    ylabel('y (nm)')
     % Check the boundary conditions of the particles
-    states = WorldBoundaryHandler(states);
+    states = WorldBoundaryHandler(states, 0);
+    if bottleneck
+        states = BoxCollisionHandler(states);
+    end
     if scatter_particle
       states = ScatterParticle(states);
     end
@@ -75,6 +85,10 @@ for epoch = 1:epochs
     temperatures(epoch) = mean(states(:,5));
     epoch
     pause (0.01)
+end
+
+if bottleneck
+    PlotBoxes;
 end
 
 if save_plots
@@ -92,7 +106,9 @@ if save_plots
     
     figure(4)
     histogram(sqrt(states(:,3).^2 + states(:,4).^2))
-    FN2 = 'Figures/Histogram of Final Particle Speeds';   
+    xlabel('Particle Speed (m/s)')
+    ylabel('Number of Particles')
+    FN2 = 'Figures/Histogram of Final Particle Speeds';  
     print(gcf, '-dpng', '-r600', FN2);  %Save graph in PNG
 end
 

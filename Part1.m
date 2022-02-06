@@ -57,9 +57,9 @@ for epoch = 1:epochs
         ylabel('y (nm)')
     end
     % Check the boundary conditions of the particles
-    states = WorldBoundaryHandler(states);
+    states = WorldBoundaryHandler(states, 0);
     % Move the particle
-    states = move_particle(states, scatter_particle);
+    states = move_particle(states);
     % Get thesemi conductor temperature at this time step
     temperatures(epoch) = mean(states(:,5));
     

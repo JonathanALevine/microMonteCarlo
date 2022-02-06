@@ -33,7 +33,6 @@ show_all_particles = 0;
 save_plots = 1;
 scatter_particle = 1;
 bottleneck = 1;
-bottlenecks = 1e-9.*[80 120 0 40; 80 120 60 100];
 
 % Generate the states
 states = GenerateStates(num_particles, distribution_type);
@@ -60,7 +59,7 @@ for epoch = 1:epochs
     xlabel('x (nm)')
     ylabel('y (nm)')
     % Check the boundary conditions of the particles
-    states = WorldBoundaryHandler(states);
+    states = WorldBoundaryHandler(states, 0);
     % Handle the collisions with the boxes
     states = BoxCollisionHandler(states);
     % scatter particle if selected scatter_particle=1
@@ -68,7 +67,7 @@ for epoch = 1:epochs
         states = ScatterParticle(states);
     end
     % Move the particle
-    states = move_particle(states, scatter_particle);
+    states = move_particle(states);
     % Get the semiconductor temperature at this time step
     temperatures(epoch) = mean(states(:,5));
     epoch
