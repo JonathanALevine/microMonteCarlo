@@ -13,7 +13,7 @@ function states = GenerateStates(num_particles, distribution_type)
             vx = random(velocity_pdf);
             vy = random(velocity_pdf);
             temperature = GetTemperature(vx, vy);
-            states(i,:) = [world.length*rand world.height*rand random(velocity_pdf) random(velocity_pdf) temperature];
+            states(i,:) = [world.length*rand world.height*rand vx vy temperature];
         end
     else
         for i=1:num_particles
@@ -21,7 +21,7 @@ function states = GenerateStates(num_particles, distribution_type)
             vx = vth*cos(angle);
             vy = vth*sin(angle);
             temperature = GetTemperature(vx, vy);
-            states(i,:) = [world.length*rand world.height*rand vth*cos(angle) vth*sin(angle) temperature];
+            states(i,:) = [world.length*rand world.height*rand vx vy temperature];
         end    
     end
 end

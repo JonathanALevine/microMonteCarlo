@@ -36,35 +36,29 @@ bottleneck = 1;
 inject_electrons = 1;
 
 % Generate the states
-if ~inject_electrons
-    states = GenerateStates(num_particles, distribution_type);
-    states = FixInitialPositions(states);
+if inject_electrons
 else
-    states = NaN(num_particles, 5); 
-end
+states = GenerateStates(num_particles, distribution_type);
+states = FixInitialPositions(states);
 
 % Get the mean speed
-try
-    mean_speed = sqrt(mean(states(:,3).^2 + states(:,4).^2));
-catch
-    warning('Empty set')
-end
+mean_speed = sqrt(mean(states(:,3).^2 + states(:,4).^2));
 
 temperatures = zeros(epochs, 1);
 
 figure(1)
 for epoch = 1:epochs
     % Inject electrons from the left with thermalized velocities
-    if (epoch >= 10 & epoch <= 1000) & inject_electrons 
-        states = InjectElectrons(states, epoch);
+    if epoch == 10
+        states = 
     end
     % Plot the positions of the particles
     subplot(2, 1, 1)
     PlotAllParticles(states)
     subplot(2, 1, 2)
     for n = 1:traced_particles
-        xValues(epoch, n) = states(n+10:n+10,1).';
-        yValues(epoch, n) = states(n+10:n+10,2).';
+        xValues(epoch, n) = states(n:n,1).';
+        yValues(epoch, n) = states(n:n,2).';
     end
     plot(xValues/10^(-9), yValues/10^(-9), '.')
     xlim([0 world.length/(10^(-9))]);
@@ -72,7 +66,7 @@ for epoch = 1:epochs
     xlabel('x (nm)')
     ylabel('y (nm)')
     % Check the boundary conditions of the particles
-    states = WorldBoundaryHandler(states, 1);
+    states = WorldBoundaryHandler(states, 0);
     % Handle the collisions with the boxes
     states = BoxCollisionHandler(states);
     % scatter particle if selected scatter_particle=1
@@ -92,21 +86,21 @@ if bottleneck
 end
 
 if save_plots
-    FN2 = 'Figures/Part 3 Particle Trajectories from Injection';   
+    FN2 = 'Figures/Part 3 Particle Trajectories';   
     print(gcf, '-dpng', '-r600', FN2);  %Save graph in PNG
 end
 
 figure(2)
 PlotParticleDensity(states)
 if save_plots
-    FN2 = 'Figures/ParticleDensityMap From Injection';   
+    FN2 = 'Figures/ParticleDensityMap';   
     print(gcf, '-dpng', '-r600', FN2);  %Save graph in PNG
 end
 
 figure(3)
 PlotTemperatureMap(states)
 if save_plots
-    FN2 = 'Figures/TemperatureMap From Injection';   
+    FN2 = 'Figures/TemperatureMap';   
     print(gcf, '-dpng', '-r600', FN2);  %Save graph in PNG
 end
 
