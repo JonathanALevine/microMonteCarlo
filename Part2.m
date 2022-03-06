@@ -31,7 +31,7 @@ distribution_type = 'MB';
 epochs = 1000;
 show_all_particles = 0;
 save_plots = 1;
-scatter_particle = 1;
+ScatterParticle = 1;
 bottleneck = 0;
 
 % Generate the states
@@ -77,10 +77,10 @@ for epoch = 1:epochs
     if bottleneck
         states = BoxCollisionHandler(states);
     end
-    if scatter_particle
+    if ScatterParticle
       states = ScatterParticle(states);
     end
-    states = move_particle(states);
+    states = MoveParticle(states);
     % Get the semiconductor temperature at this time step
     temperatures(epoch) = mean(states(:,5));
     epoch

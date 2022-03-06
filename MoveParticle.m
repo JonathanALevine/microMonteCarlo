@@ -4,4 +4,3 @@ function states = move_particle(states)
     states(:,2) = states(:,2) + states(:,4)*dt;
     states(:,5) = GetTemperature(states(:,3), states(:,4));
 end
-

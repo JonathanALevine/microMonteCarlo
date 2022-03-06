@@ -4,12 +4,22 @@ clear; %intialization
 set(0,'DefaultFigureWindowStyle','docked')
 
 % Constants
-global m0 m T k tau;
+global m0 m T k tau qe Vx Vy Pscat;
 m0 = 9.10938356*10^(-31); %Electron rest mass
 m = 0.26*m0; 
 T = 300;
 k = 1.38064852*10^(-23); %Boltzmann Constant
 tau = 0.2*10^(-12);
+qe = 1.60217662*10^(-19); % Electron charge
+
+% Simulation controls
+global world;
+world.length = 200*10^(-9);
+world.height = 100*10^(-9);
+
+% Voltage in the x and y directions
+Vx = 0.1;
+Vy = 0;
 
 global vth;
 vth = sqrt(2*k*T/m);
@@ -17,22 +27,20 @@ vth = sqrt(2*k*T/m);
 % The mean free path = velocity*mean time between collisions
 MFP = vth * tau;
 
-% Simulation controls
-global world;
-world.length = 200*10^(-9);
-world.height = 100*10^(-9);
-
-num_particles = 1000;
+num_particles = 100;
 traced_particles = 10;
-distribution_type = nan;
+distribution_type = 'MB';
 scatter_particle = 0;
 
 global dt;
 dt = world.height/vth/100;
 epochs = 1000;
 
+Pscat = 1 - exp(-dt/tau);
+
 show_all_particles = 0;
-save_plots = 1;
+
+save_plots = 0;
 
 % Generate the states
 states = GenerateStates(num_particles, distribution_type);
@@ -58,11 +66,16 @@ for epoch = 1:epochs
     end
     % Check the boundary conditions of the particles
     states = WorldBoundaryHandler(states, 0);
+    % Scatter the particle
+    states = ScatterParticle(states);
+    % Update the states based on the electric field
+    states = ElectricFieldHandler(states)
     % Move the particle
     states = MoveParticle(states);
     % Get thesemi conductor temperature at this time step
     temperatures(epoch) = mean(states(:,5));
     
+    epoch/epochs * 100
     pause (0.01)
 end
 
@@ -78,4 +91,3 @@ if save_plots
     FN2 = 'Figures/Part 1 Temperature Plot';   
     print(gcf, '-dpng', '-r600', FN2);  %Save graph in PNG
 end
-

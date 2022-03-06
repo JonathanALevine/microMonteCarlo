@@ -80,7 +80,7 @@ for epoch = 1:epochs
         states = ScatterParticle(states);
     end
     % Move the particle
-    states = move_particle(states);
+    states = MoveParticle(states);
     % Get the semiconductor temperature at this time step
     temperatures(epoch) = mean(states(:,5));
     epoch
