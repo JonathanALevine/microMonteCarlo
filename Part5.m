@@ -22,13 +22,6 @@ world.height = 100*10^(-9);
 Vx = 0.1;
 Vy = 0;
 
-Ex = Vx/world.length;
-Ey = Vy/world.height;
-Fx = qe*Ex;
-Fy = qe*Ey;
-ax = Fx/m;
-ay = Fy/m;
-
 global vth;
 vth = sqrt(2*k*T/m);
 
