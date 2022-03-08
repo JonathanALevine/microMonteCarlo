@@ -105,8 +105,8 @@ c.Label.String = 'Conductivity Scale (S/m)';
 figure('name', 'V(x, y)')
 contourf(GetVMap(V));
 axis tight
-xlabel("X position (nm)")
-ylabel("Y position (nm)")
+xlabel("X position")
+ylabel("Y position")
 zlabel("Voltage")
 title("Potential")
 view(0, 90)
@@ -121,9 +121,9 @@ Ey = -Ey;
                   linspace(0, 100*10^(-9), 100));
 
 figure('name', 'E(x, y)')
-quiver(X/10^(-9), Y/10^(-9), Ex, Ey)
-xlabel("X position (nm)")
-ylabel("Y position (nm)")
+quiver(X/10^(-9)), Y, Ex, Ey)
+xlabel("X position")
+ylabel("Y position")
 zlabel("E(x, y)")
 title("Electric Field")
 axis tight

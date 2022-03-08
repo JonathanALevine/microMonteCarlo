@@ -35,20 +35,19 @@ vth = sqrt(2*k*T/m);
 % The mean free path = velocity*mean time between collisions
 MFP = vth * tau;
 
+% Simulation Controls
 num_particles = 10000;
 traced_particles = 10;
 distribution_type = 'MB';
-scatter_particle = 0;
+epochs = 1000;
+show_all_particles = 0;
+save_plots = 1;
+scatter_particle = 1;
+bottleneck = 0;
 
 global dt;
 dt = world.height/vth/100;
-epochs = 1000;
-
 Pscat = 1 - exp(-dt/tau);
-
-show_all_particles = 0;
-
-save_plots = 1;
 
 % Generate the states
 states = GenerateStates(num_particles, distribution_type);

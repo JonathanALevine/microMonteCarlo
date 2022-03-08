@@ -1,4 +1,0 @@
-function J = GetDriftCurrent(states)
-    global rho;
-    J = mean(states(:, 3))
-end
