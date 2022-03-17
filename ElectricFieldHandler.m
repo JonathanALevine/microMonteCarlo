@@ -1,4 +1,5 @@
 function states = ElectricFieldHandler(states)
+    % UPDATES VX AND VY FROM AX AND AY FROM ELECTRICFIELD
     global Vx Vy m world qe dt;
     % Get the electric field from the potential and world 
     % size
@@ -8,7 +9,7 @@ function states = ElectricFieldHandler(states)
     Fy = qe*Ey;
     ax = Fx/m;
     ay = Fy/m;
-    states(:, 3) = states(:, 3) + ax*dt;
-    states(:, 4) = states(:, 4) + ay*dt;
+    states(:, 6) = ax;
+    states(:, 7) = ay;
 end
 
