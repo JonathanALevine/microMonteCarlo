@@ -41,7 +41,7 @@ traced_particles = 10;
 distribution_type = 'MB';
 epochs = 1000;
 show_all_particles = 0;
-save_plots = 1;
+save_plots = 0;
 scatter_particle = 1;
 bottleneck = 0;
 
@@ -51,6 +51,10 @@ Pscat = 1 - exp(-dt/tau);
 
 % Generate the states
 states = GenerateStates(num_particles, distribution_type);
+figure('name', 'v_x histogram')
+histogram(states(:,3))
+xlabel('V_x (m/s)')
+ylabel('Count')
 
 temperatures = zeros(epochs, 1);
 DriftCurrents = zeros(epochs, 1);

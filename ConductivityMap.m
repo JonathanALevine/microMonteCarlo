@@ -1,9 +1,10 @@
-function cMap = ConductivityMap(sigma_inside, sigma_outside)
+function cMap = ConductivityMap(sigma_inside, sigma_outside, box)
     % Define the limits of the boxes
     nx = 200;
     ny = 100;
-    global boxes world;
-    boxes = [nx*8/20 nx*12/20 ny*4/10 ny*6/10]; 
+    global boxes;
+    boxes = [nx*(box.left_wall/10^(-9))/200 nx*(box.right_wall/10^(-9))/200 ny*(box.top_wall/10^(-9))/100 ny*(box.top_wall2/10^(-9))/100]; 
+    
     cMap = zeros(nx, ny);
     for i=1:nx
         for j=1:ny

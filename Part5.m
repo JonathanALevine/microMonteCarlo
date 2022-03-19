@@ -28,29 +28,31 @@ MFP = vth * tau;
 num_particles = 10000;
 traced_particles = 10;
 distribution_type = 'MB';
-epochs = 1000;
+epochs = 2000;
 show_all_particles = 0;
-save_plots = 1;
+save_plots = 0;
 scatter_particle = 1;
 bottleneck = 1;
 
 global dt;
-dt = world.height/vth/100;
+dt = world.height/vth/200;
 Pscat = 1 - exp(-dt/tau);
 
 [X, Y] = meshgrid(linspace(0, 200*10^(-9), 200), ...
               linspace(0, 100*10^(-9), 100));
+          
+global box;
+box.left_wall = 80*10^(-9);
+box.right_wall = 120*10^(-9);
+box.top_wall = 40*10^(-9);
+box.top_wall2 = 60*10^(-9);
 
 % Generate the states and fix their initial positions
 states = GenerateStates(num_particles, distribution_type);
-states = FixInitialPositions(states);
-% Remove particles that spawn inside the boxes
-if bottleneck
-    states = FixInitialPositions(states);
-end
+states = FixInitialPositions(states, box);
 
 % Make the conductivity map
-cMap = ConductivityMap(0.01, 1);
+cMap = ConductivityMap(0.01, 1, box);
 V = PotentialSolver(0.1, cMap);
 
 temperatures = zeros(epochs, 1);
@@ -62,7 +64,6 @@ Ey = -Ey;
 
 figure('name', 'Particle Traj.')
 for epoch = 1:epochs
-    % Plot the positions of the particles
     % Plot the positions of the particles
     if show_all_particles
         PlotAllParticles(states);
@@ -83,7 +84,7 @@ for epoch = 1:epochs
     % Check the boundary conditions of the particles
     states = WorldBoundaryHandler(states, 0);
     % HANDLE THE BOX COLLISIONS
-    states = BoxCollisionHandler(states);
+    states = BoxCollisionHandler(states, box);
     % Scatter the particle
     if scatter_particle
         states = ScatterParticle(states);
@@ -118,7 +119,6 @@ title("Potential")
 view(45, 45)
 c = colorbar;
 c.Label.String = 'Potential Scale (V)';
-
 if save_plots
     FN2 = 'Figures/Assignment3/Part2 - PotentialMap';   
     print(gcf, '-dpng', '-r600', FN2);  %Save graph in PNG
