@@ -51,10 +51,10 @@ Pscat = 1 - exp(-dt/tau);
 
 % Generate the states
 states = GenerateStates(num_particles, distribution_type);
-figure('name', 'v_x histogram')
-histogram(states(:,3))
-xlabel('V_x (m/s)')
-ylabel('Count')
+% figure('name', 'v_x histogram')
+% histogram(states(:,3))
+% xlabel('V_x (m/s)')
+% ylabel('Count')
 
 temperatures = zeros(epochs, 1);
 DriftCurrents = zeros(epochs, 1);
