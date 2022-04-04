@@ -72,19 +72,19 @@ for simulation=1:simulations
     figure('name', 'Particle Traj.')
     for epoch = 1:epochs
         % Plot the positions of the particles
-        if show_all_particles
-            PlotAllParticles(states);
-        else
-            for n = 1:traced_particles
-                xValues(epoch, n) = states(n:n,1).';
-                yValues(epoch, n) = states(n:n,2).';
-            end
-            plot(xValues/10^(-9), yValues/10^(-9), '.')
-            xlim([0 world.length/(10^(-9))]);
-            ylim([0 world.height/(10^(-9))]);
-            xlabel('x (nm)')
-            ylabel('y (nm)')
-        end
+%         if show_all_particles
+%             PlotAllParticles(states);
+%         else
+%             for n = 1:traced_particles
+%                 xValues(epoch, n) = states(n:n,1).';
+%                 yValues(epoch, n) = states(n:n,2).';
+%             end
+%             plot(xValues/10^(-9), yValues/10^(-9), '.')
+%             xlim([0 world.length/(10^(-9))]);
+%             ylim([0 world.height/(10^(-9))]);
+%             xlabel('x (nm)')
+%             ylabel('y (nm)')
+%         end
 
         % Simple Acceleration Solver 
         states = SimpleAccelerationSolver(states, Ex, Ey);
@@ -104,7 +104,6 @@ for simulation=1:simulations
         DriftCurrents(epoch) = GetDriftCurrent(states);
 
         epoch/epochs * 100
-        pause(0.01)
     end
     
     mean(DriftCurrents)
