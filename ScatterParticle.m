@@ -6,5 +6,6 @@ function states = ScatterParticle(states)
     sigma = sqrt(k*T/m);
     velocity_pdf = makedist('Normal', 'mu', mu, 'sigma', sigma);
     states(r,3:4) = random(velocity_pdf, [sum(r), 2]);
+    return;
 end
 
