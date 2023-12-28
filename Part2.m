@@ -25,13 +25,12 @@ Pscat = 1 - exp(-dt/tau);
 MFP = vth * tau;
 
 % Simulation Controls
-num_particles = 10000;
+num_particles = 1000;
 traced_particles = 10;
 distribution_type = 'MB';
-epochs = 1000;
+epochs = 500;
 show_all_particles = 0;
-save_plots = 1;
-ScatterParticle = 1;
+scatter = 1;
 bottleneck = 0;
 
 % Generate the states
@@ -43,42 +42,24 @@ end
 
 % Get the mean speed
 mean_speed = sqrt(mean(states(:,3).^2 + states(:,4).^2));
-
-% Get histogram of particle speeds
-figure(1)
-histogram(sqrt(states(:,3).^2 + states(:,4).^2))
-xlabel('Particle Speed (m/s)')
-ylabel('Number of Particles')
-if save_plots
-    FN2 = 'Figures/Histogram of Initial Particle Speeds';   
-    print(gcf, '-dpng', '-r600', FN2);  %Save graph in PNG
-end
-
 temperatures = zeros(epochs, 1);
 
 for epoch = 1:epochs
     % Plot the positions of the particles
-    figure(2)
+    figure(1)
     % Plot the positions of the particles
-    subplot(2, 1, 1)
     PlotAllParticles(states)
-    subplot(2, 1, 2)
-    for n = 1:traced_particles
-        xValues(epoch, n) = states(n:n,1).';
-        yValues(epoch, n) = states(n:n,2).';
-    end
-    plot(xValues/10^(-9), yValues/10^(-9), '.')
     xlim([0 world.length/(10^(-9))]);
     ylim([0 world.height/(10^(-9))]);
     xlabel('x (nm)')
     ylabel('y (nm)')
     % Check the boundary conditions of the particles
-    states = WorldBoundaryHandler(states, 0);
+    states = WorldBoundaryHandler(states, 1);
     if bottleneck
         states = BoxCollisionHandler(states);
     end
-    if ScatterParticle
-      states = ScatterParticle(states);
+    if scatter
+        states = ScatterParticle(states);
     end
     states = MoveParticle(states);
     % Get the semiconductor temperature at this time step
@@ -89,26 +70,5 @@ end
 
 if bottleneck
     PlotBoxes;
-end
-
-if save_plots
-    FN2 = 'Figures/Part 2 Particle Trajectories';   
-    print(gcf, '-dpng', '-r600', FN2);  %Save graph in PNG
-
-    figure(3)
-    plot(temperatures)
-    xlabel('Time (1/100 sec)')
-    ylabel('Temperature (K)')
-    ylim([min(temperatures)*0.98 max(temperatures)*1.02])
-
-    FN2 = 'Figures/Part 2 Temperature Plot';   
-    print(gcf, '-dpng', '-r600', FN2);  %Save graph in PNG
-    
-    figure(4)
-    histogram(sqrt(states(:,3).^2 + states(:,4).^2))
-    xlabel('Particle Speed (m/s)')
-    ylabel('Number of Particles')
-    FN2 = 'Figures/Histogram of Final Particle Speeds';  
-    print(gcf, '-dpng', '-r600', FN2);  %Save graph in PNG
 end
 

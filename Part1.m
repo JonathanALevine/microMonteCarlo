@@ -31,7 +31,7 @@ global dt;
 dt = world.height/vth/100;
 epochs = 1000;
 
-show_all_particles = 1;
+show_all_particles = 0;
 save_plots = 0;
 
 % Generate the states
