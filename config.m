@@ -19,5 +19,4 @@ Pscat = 1 - exp(-dt/tau);
 % Simulation controls
 num_particles = 100;
 distribution_type = 'MB';
-epochs = 1000;
 scattering = 1;
