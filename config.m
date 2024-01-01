@@ -4,7 +4,7 @@ global num_particles distribution_type scattering;
 global vth;
 global world;
 global dt;
-global 
+
 
 m0 = 9.10938356*10^(-31); %Electron rest mass
 m = 0.26*m0;
