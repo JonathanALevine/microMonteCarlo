@@ -39,7 +39,7 @@ num_particles = 250;
 distribution_type = 'MB';
 scattering = 0;
 ```
-<pre>
+</pre>
 
 ### Features
 List down the features of your project here. For example:
