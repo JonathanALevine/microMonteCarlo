@@ -14,9 +14,9 @@ world.length = 400*10^(-9);
 world.height = 200*10^(-9);
 vth = sqrt(2*k*T/m);
 dt = world.height/vth/100;
-epochs = 1000;
+epochs = 250;
 Pscat = 1 - exp(-dt/tau);
 % Simulation controls
-num_particles = 1000;
+num_particles = 250;
 distribution_type = 'MB';
 scattering = 1;
