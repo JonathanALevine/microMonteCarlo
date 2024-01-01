@@ -17,6 +17,6 @@ dt = world.height/vth/100;
 epochs = 1000;
 Pscat = 1 - exp(-dt/tau);
 % Simulation controls
-num_particles = 100;
+num_particles = 1000;
 distribution_type = 'MB';
 scattering = 1;
