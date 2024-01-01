@@ -9,7 +9,6 @@ function run(states, epochs)
         states = WorldBoundaryHandler(states, 1);
         % handle scattering
         states = ScatterParticle(states);
-        states = 
         states = MoveParticle(states); % move the particles
         epoch % print the epoch in terminal
         pause(0.01);

@@ -1,6 +1,6 @@
 # microMonteCarlo
 
-![Monte Carlo simulation with scattering on](scattering_on.gif)
+![Monte Carlo simulation with scattering on](assets/scattering_on.gif)
 A micro project for playing around with Monte Carlo simulations. 
 This project was initially for simulating Electron Transport using Monte Carlo techniques.
 
@@ -8,9 +8,10 @@ This project was initially for simulating Electron Transport using Monte Carlo t
 
 ### Installation
 This project is built and validated in *MATLAB R2022a* running on *Ubuntu 22.04.03* and *MacOS 14 Sonoma*. 
-However it should work in any MATLAB version.
+However it should work in any MATLAB version and in Windows.
 
-In Ubuntu or MacOS open a terminal and clone the repo, then open the project in MATLAB:
+In Ubuntu or MacOS open a terminal and clone the repo, then open the project in MATLAB.
+To clone the project enter this in a terminal:
 ```bash
 git clone https://github.com/JonathanALevine/microMonteCarlo
 ```
@@ -18,7 +19,7 @@ git clone https://github.com/JonathanALevine/microMonteCarlo
 ### Example usage
 Scattering disabled for the electrons
 
-![Monte Carlo simulation with scattering on](scattering_off.gif)
+![Monte Carlo simulation with scattering on](assets/scattering_off.gif)
 ```matlab
 % Constants
 global m0 m T k tau Pscat dt epochs;
