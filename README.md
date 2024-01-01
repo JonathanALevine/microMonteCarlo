@@ -7,7 +7,7 @@ This project was initially for simulating Electron Transport using Monte Carlo t
 
 
 ### Installation
-This project is built and validated in *MATLAB R2022a* running on *Ubuntu 22.04.03* and *MacOS 14 Sonoma*. 
+This project is built and validated in **MATLAB R2022a** running on **Ubuntu 22.04.03** and **MacOS 14 Sonoma**. 
 However it should work in any MATLAB version and in Windows.
 
 In Ubuntu or MacOS open a terminal and clone the repo, then open the project in MATLAB.
