@@ -4,6 +4,7 @@ global num_particles distribution_type scattering;
 global vth;
 global world;
 global dt;
+global 
 
 m0 = 9.10938356*10^(-31); %Electron rest mass
 m = 0.26*m0;
@@ -19,4 +20,4 @@ Pscat = 1 - exp(-dt/tau);
 % Simulation controls
 num_particles = 250;
 distribution_type = 'MB';
-scattering = 1;
+scattering = 0;
