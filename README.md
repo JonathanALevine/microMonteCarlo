@@ -46,6 +46,15 @@ distribution_type = 'MB';
 scattering = 0;
 ```
 
+```matlab
+close all;  
+clear; %intialization
+set(0,'DefaultFigureWindowStyle','docked')
+config; % load the simulation configurations
+states = GenerateStates(num_particles, distribution_type);
+run(states, epochs);
+```
+
 ### Features
 List down the features of your project here. For example:
 - Electron movement under an electric field is implemented in `Part5.m` in 
