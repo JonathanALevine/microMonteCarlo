@@ -1,21 +1,18 @@
 # microMonteCarlo
 
 ## Introduction
-This is where you can provide an introduction to your project. 
-Explain what your project does, its purpose, 
-and any other relevant information that a user or contributor would find useful.
-
-## Demo
 Scattering enabled for the electrons
 ![Monte Carlo simulation with scattering on](scattering_on.gif)
 
 Scattering disabled for the electrons
 ![Monte Carlo simulation with scattering on](scattering_off.gif)
 
-Electron movement under an electric field is implemented in Part5.m in 
-[legacy branch](https://github.com/JonathanALevine/microMonteCarlo/tree/legacy) 
-for previous versions and historical data.
-.
+## Demo
+
+Electron movement under an electric field is implemented in 'Part5.m' in 
+[legacy](https://github.com/JonathanALevine/microMonteCarlo/tree/legacy).
+Work is ongoing at at tranferring this to [main](https://github.com/JonathanALevine/microMonteCarlo). 
+PR's are welcome if you would like to implement this. 
 
 ## Features
 List down the features of your project here. For example:
