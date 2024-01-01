@@ -13,8 +13,7 @@ Provide instructions on how to install and run your project. For example:
 Scattering disabled for the electrons
 
 ![Monte Carlo simulation with scattering on](scattering_off.gif)
-<pre>
-```
+```matlab
 % Constants
 global m0 m T k tau Pscat dt epochs;
 global num_particles distribution_type scattering;
@@ -39,7 +38,6 @@ num_particles = 250;
 distribution_type = 'MB';
 scattering = 0;
 ```
-</pre>
 
 ### Features
 List down the features of your project here. For example:
