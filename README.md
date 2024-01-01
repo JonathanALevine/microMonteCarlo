@@ -11,7 +11,9 @@ This project is built and validated in *MATLAB R2022a* running on *Ubuntu 22.04.
 However it should work in any MATLAB version.
 
 In Ubuntu or MacOS open a terminal and clone the repo, then open the project in MATLAB:
-`git clone https://github.com/JonathanALevine/microMonteCarlo`
+```bash
+git clone https://github.com/JonathanALevine/microMonteCarlo
+```
 
 ### Example usage
 Scattering disabled for the electrons
