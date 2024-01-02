@@ -2,9 +2,9 @@
 
 ![Monte Carlo simulation with scattering on](assets/scattering_on.gif)
 A micro project for playing around with Monte Carlo simulations. 
-This project was initially for simulating Electron Transport using Monte Carlo techniques.
-
-
+This project was initially for simulating Electron Transport using Monte Carlo methods.
+For more information on Monte Carlo methods for electron transport see here:
+https://en.wikipedia.org/wiki/Monte_Carlo_methods_for_electron_transport
 
 ### Installation
 This project is built and validated in **MATLAB R2022a** running on **Ubuntu 22.04.03** and **MacOS 14 Sonoma**. 
@@ -17,7 +17,9 @@ git clone https://github.com/JonathanALevine/microMonteCarlo
 ```
 
 ### Example usage
-Scattering disabled for the electrons
+To set up a simulation with random scattering disabled see `config.m`.
+
+`WorldBoundaryHandler.m` controls the behaviour of the world's boundaries.
 
 ![Monte Carlo simulation with scattering on](assets/scattering_off.gif)
 ```matlab
