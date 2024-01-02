@@ -17,11 +17,11 @@ git clone https://github.com/JonathanALevine/microMonteCarlo
 ```
 
 ### Example usage
-To set up a simulation with random scattering disabled see `config.m`.
+To set up a simulation with random scattering disabled set `scattering = 0` in `config.m`.
+`config.m` contains other variables that control the conditions of the simulamtion. 
+`num_particles` sets the number of particles and `distribution_type` sets the initial distribution of the
+particle velocities. Example below sets `distribution_type = 'MB'` for a Maxwell-Boltzmann Distribution.
 
-`WorldBoundaryHandler.m` controls the behaviour of the world's boundaries.
-
-![Monte Carlo simulation with scattering on](assets/scattering_off.gif)
 ```matlab
 % Constants
 global m0 m T k tau Pscat dt epochs;
@@ -47,6 +47,11 @@ num_particles = 250;
 distribution_type = 'MB';
 scattering = 0;
 ```
+
+`WorldBoundaryHandler.m` controls the behaviour of the world's boundaries.
+
+![Monte Carlo simulation with scattering on](assets/scattering_off.gif)
+
 
 ```matlab
 close all;  
