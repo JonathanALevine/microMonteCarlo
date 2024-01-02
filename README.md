@@ -65,14 +65,12 @@ run(states, epochs);
 ```
 ![Monte Carlo simulation with scattering on](assets/scattering_off.gif)
 
-
 ### Features
 List down the features of your project here. For example:
 - Electron movement under an electric field is implemented in `Part5.m` in 
 [legacy](https://github.com/JonathanALevine/microMonteCarlo/tree/legacy).
 Work is ongoing at tranferring this to [main](https://github.com/JonathanALevine/microMonteCarlo). 
 PR's are welcome if you would like to implement this. 
-- Feature 2
-- Feature 3
-
-
+- This project currently does not have tests. This is needed. PR's are welcome if you would like to implement this.
+- For code to record the simulation to record the simulations as a video see `main.m` and `run.m` in [readme-file](https://github.com/JonathanALevine/microMonteCarlo/tree/readme-file). 
+See https://itsfoss.com/convert-video-gif-linux/ on how to convert .avi files to gif via Linux terminal commands.
