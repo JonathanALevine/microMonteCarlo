@@ -20,7 +20,7 @@ git clone https://github.com/JonathanALevine/microMonteCarlo
 To set up a simulation with random scattering disabled set `scattering = 0` in `config.m`.
 `config.m` contains other variables that control the conditions of the simulation. 
 `num_particles` sets the number of particles and `distribution_type` sets the initial distribution of the
-particle velocities. Example below sets `distribution_type = 'MB'` for a Maxwell-Boltzmann distribution.
+particle velocities. The example MATLAB code below sets `distribution_type = 'MB'` for a Maxwell-Boltzmann distribution.
 
 ```matlab
 % Constants
@@ -50,13 +50,11 @@ scattering = 0;
 
 World boundary conditions are controlled by `WorldBoundaryHandler.m`.
 with `specular_boundaries = 1` the borders of the world are rigid causing particles to bounce off the borders.
-With `specular_boundaries = 0` the horizontal borders are rigid but the vertical border wrap around, 
-so the world has this shape:
+With `specular_boundaries = 0` the horizontal borders are rigid but the vertical borders wrap around, 
+so the world has is basically a cylinder like this:
 ![Specular boundaries off](assets/specular_boundaries_0.png)
 
-![Monte Carlo simulation with scattering on](assets/scattering_off.gif)
-
-
+`main.m` runs the simulation and an example is below:
 ```matlab
 close all;  
 clear; %intialization
@@ -65,6 +63,8 @@ config; % load the simulation configurations
 states = GenerateStates(num_particles, distribution_type);
 run(states, epochs);
 ```
+![Monte Carlo simulation with scattering on](assets/scattering_off.gif)
+
 
 ### Features
 List down the features of your project here. For example:
