@@ -72,5 +72,5 @@ List down the features of your project here. For example:
 Work is ongoing at tranferring this to [main](https://github.com/JonathanALevine/microMonteCarlo). 
 PR's are welcome if you would like to implement this. 
 - This project currently does not have tests. This is needed. PR's are welcome if you would like to implement this.
-- For code to record the simulation to record the simulations as a video see `main.m` and `run.m` in [readme-file](https://github.com/JonathanALevine/microMonteCarlo/tree/readme-file). 
+- For code to record the simulations a videos in .avi see `main.m` and `run.m` in [readme-file](https://github.com/JonathanALevine/microMonteCarlo/tree/readme-file). 
 See https://itsfoss.com/convert-video-gif-linux/ on how to convert .avi files to gif via Linux terminal commands.
