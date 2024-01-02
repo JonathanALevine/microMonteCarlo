@@ -51,7 +51,7 @@ scattering = 0;
 World boundary conditions are controlled by `WorldBoundaryHandler.m`.
 with `specular_boundaries = 1` the borders of the world are rigid causing particles to bounce off the borders.
 With `specular_boundaries = 0` the horizontal borders are rigid but the vertical borders wrap around, 
-so the world has is basically a cylinder like this:
+so the world is basically a cylinder like this:
 ![Specular boundaries off](assets/specular_boundaries_0.png)
 
 `main.m` runs the simulation and an example is below:
