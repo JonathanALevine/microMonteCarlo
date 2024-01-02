@@ -1,2 +1,4 @@
 # ignore these types of files
 *.asv
+draw_sheet.m
+*.avi
